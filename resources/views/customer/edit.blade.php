@@ -3,7 +3,7 @@
 @section('content')
 <div class="card">
     <div class="card-body">
-        {!! Form::open(['url' => route('customer.store')]) !!}
+        {!! Form::model($customer, ['url' => route('customer.update', $customer->id), 'method' => 'PUT']) !!}
 
             @include('customer.form')
 

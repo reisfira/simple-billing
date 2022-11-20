@@ -22,7 +22,10 @@ class CustomerController extends Controller
 
     public function index()
     {
-        return view('customer.index');
+        $data = [];
+        $data['customers'] = Customer::all();
+
+        return view('customer.index', $data);
     }
 
     public function create()
@@ -38,6 +41,35 @@ class CustomerController extends Controller
             'phone_no' => $request['phone_no'],
             'email' => $request['email'],
         ]);
+
+        return redirect()->route('customer.index');
+    }
+
+    public function edit($id)
+    {
+        $data = [];
+        $data['customer'] = Customer::find($id);
+
+        return view('customer.edit', $data);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $customer = Customer::find($id);
+        $customer->update([
+            'code' => $request['code'],
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'phone_no' => $request['phone_no'],
+        ]);
+
+        return redirect()->back();
+    }
+
+    public function destroy($id)
+    {
+        $customer = Customer::find($id);
+        $customer->delete();
 
         return redirect()->route('customer.index');
     }

@@ -1,9 +1,5 @@
 @extends('layouts.master')
 
-@push('head')
-    <link rel="stylesheet" href="//cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
-@endpush
-
 @section('content')
 <a href="{{ route('customer.create') }}" class="btn btn-primary mb-3">Create</a>
 <div class="card">
@@ -43,10 +39,6 @@
     </div>
 </div>
 @endsection
-
-@push('scripts-include')
-    <script src="//cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
-@endpush
 
 @push('scripts')
     @include('customer.index-js')

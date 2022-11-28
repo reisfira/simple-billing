@@ -9,6 +9,8 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/datatables.bootstrap4.min.css') }}">
+
     @stack('head')
 </head>
 
@@ -69,6 +71,9 @@
     </div>
 
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/jquery.datatables.min.js') }}"></script>
+    <script src="{{ asset('js/datatables.bootstrap4.min.js') }}"></script>
+
     @stack('scripts-include')
     <script>
         (function() {

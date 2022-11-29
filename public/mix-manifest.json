@@ -4,8 +4,7 @@
     "/js/jquery.datatables.min.js": "/js/jquery.datatables.min.js",
     "/js/datatables.bootstrap4.min.js": "/js/datatables.bootstrap4.min.js",
     "/css/datatables.bootstrap4.min.css": "/css/datatables.bootstrap4.min.css",
-    "/css/select2.min.css": "/css/select2.min.css",
-    "/css/select2-bootstrap4.min.css": "/css/select2-bootstrap4.min.css",
+    "/css/select.min.css": "/css/select.min.css",
     "/js/select2.min.js": "/js/select2.min.js",
-    "/js/select2.full.min.js": "/js/select2.full.min.js"
+    "/css/select2-bootstrap4.min.css": "/css/select2-bootstrap4.min.css"
 }

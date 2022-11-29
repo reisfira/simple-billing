@@ -4,4 +4,6 @@
  * */
 $('.select2-default').select2({
     theme: 'bootstrap4',
+    width: '100%',
+    dropdownAutoWidth: true,
 })

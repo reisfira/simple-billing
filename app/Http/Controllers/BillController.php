@@ -10,6 +10,8 @@ use App\Models\Transaction\BillItem;
 use App\Models\Masterfile\Customer;
 use App\Models\Masterfile\Item;
 
+use PDF;
+
 class BillController extends Controller
 {
     public function index()
@@ -92,5 +94,32 @@ class BillController extends Controller
         $resource->delete();
 
         return redirect()->route('bill.index');
+    }
+
+    public function print($id)
+    {
+        $resource = Bill::find($id);
+        $resource_items = BillItem::where('bill_no', $resource->bill_no)->get();
+        $customer = Customer::where('code', $resource->customer_code)->first();
+
+        $data = [];
+        $data['resource'] = $resource;
+        $data['resource_items'] = $resource_items;
+        $data['customer'] = $customer;
+
+        $pdf = PDF::loadView('bill.print', $data);
+
+
+        $header_blade = 'bill.print-header';
+        $header = view()->make($header_blade, $data)->render();
+        $pdf->setOption('header-html', $header);
+        $pdf->setOption('margin-top', 35);
+
+        $footer_blade = 'bill.print-footer';
+        $footer = view()->make($footer_blade, $data)->render();
+        $pdf->setOption('footer-html', $footer);
+        $pdf->setOption('margin-bottom', 35);
+
+        return $pdf->inline();
     }
 }

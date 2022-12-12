@@ -32,6 +32,11 @@
                                 data-confirm="Do you confirm want to delete this bill ? {{ $resource->bill_no }}">
                                 <i class="fas fa-times"></i>
                             </a>
+
+                            <a href="{{ route('bill.print', $resource->id) }}" class="btn btn-info">
+                                <i class="fas fa-print pr-2"></i>
+                                Print
+                            </a>
                         </td>
                     </tr>
                 @endforeach

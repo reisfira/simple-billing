@@ -29,6 +29,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('item', ItemController::class);
     Route::resource('category', CategoryController::class);
     Route::resource('salesman', SalesmanController::class);
+
+    Route::get('bill/{id}/print', [ BillController::class, 'print' ])->name('bill.print');
     Route::resource('bill', BillController::class);
 
     // utilities controller

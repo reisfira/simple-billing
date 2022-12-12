@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon, Str;
 
 use App\Models\Transaction\Bill;
+use App\Models\Transaction\BillItem;
 use App\Models\Masterfile\Customer;
 use App\Models\Masterfile\Item;
 
@@ -53,6 +54,7 @@ class BillController extends Controller
 
         $data = [];
         $data['resource'] = $resource;
+        $data['bill_items'] = BillItem::where('bill_no', $resource->bill_no)->orderBy('line_no')->get();
         $data['customer_codes'] = Customer::pluck('code', 'code')->toArray();
         $data['bill_no'] = $resource->bill_no;
         $data['item_codes'] = Item::get()->pluck('detail', 'code')->toArray();
@@ -64,9 +66,22 @@ class BillController extends Controller
     {
         $resource = Bill::find($id);
         $resource->update([
-            'code' => $request['code'],
-            'name' => $request['name'],
+            'date' => $request['date'],
+            'customer_code' => $request['customer_code'],
+            'customer_name' => $request['customer_name'],
+            'grand_total' => $request['grand_total'],
         ]);
+
+        for ($i=1; $i < count($request['item_code']); $i++) {
+            $resource_item = BillItem::create([
+                'bill_no' => $resource->bill_no,
+                'item_code' => $request['item_code'][$i],
+                'line_no' => $request['line_no'][$i],
+                'quantity' => $request['quantity'][$i],
+                'price' => $request['price'][$i],
+                'amount' => $request['amount'][$i],
+            ]);
+        }
 
         return redirect()->back();
     }

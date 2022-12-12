@@ -7,6 +7,8 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SalesmanController;
+use App\Http\Controllers\BillController;
+use App\Http\Controllers\UtilityController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,4 +29,9 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('item', ItemController::class);
     Route::resource('category', CategoryController::class);
     Route::resource('salesman', SalesmanController::class);
+    Route::resource('bill', BillController::class);
+
+    // utilities controller
+    Route::post('select/customer', [ UtilityController::class, 'selectCustomer' ])->name('utility.select.customer');
+    Route::post('select/item', [ UtilityController::class, 'selectItem' ])->name('utility.select.item');
 });
